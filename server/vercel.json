@@ -13,7 +13,7 @@
     }
   ],
   "env": {
-    "DB_HOST": "@localhost",
+    "DB_HOST": "localhost",
     "DB_USER": "@root",
     "DB_PASSWORD": "@Halli@18012010",
     "DB_DATABASE": "@test",
