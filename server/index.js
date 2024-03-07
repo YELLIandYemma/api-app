@@ -1,6 +1,14 @@
 const express = require("express");
 const mysql = require("mysql2"); // Use mysql2 instead of mysql
 require("dotenv").config();
+const cors = require("cors");
+const corsConfig = {
+  origin: "*",
+  Credential: true,
+  methods: ["GET", "POST", "DELETE", "PUT"],
+};
+
+app.use(cors(corsConfig));
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
