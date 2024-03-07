@@ -1,14 +1,9 @@
 const express = require("express");
-const mysql = require("mysql2"); // Use mysql2 instead of mysql
-require("dotenv").config();
+const mysql = require("mysql2");
+const dotenv = require("dotenv");
 const cors = require("cors");
-const corsConfig = {
-  origin: "*",
-  Credential: true,
-  methods: ["GET", "POST", "DELETE", "PUT"],
-};
 
-app.use(cors(corsConfig));
+dotenv.config();
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -26,6 +21,7 @@ connection.connect((err) => {
 });
 
 const app = express();
+app.use(cors()); // Enable CORS for all routes
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
