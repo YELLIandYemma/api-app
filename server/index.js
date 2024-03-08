@@ -6,10 +6,10 @@ const cors = require("cors");
 dotenv.config();
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  host: "sql6.freesqldatabase.com",
+  user: "sql6689510",
+  password: "GbzXHblbJ2",
+  database: "sql6689510",
 });
 
 connection.connect((err) => {
