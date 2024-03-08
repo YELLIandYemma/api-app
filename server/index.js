@@ -30,12 +30,15 @@ app.get("/products", (req, res) => {
   connection.query("SELECT * FROM products", (error, results, fields) => {
     if (error) {
       console.error("Error querying database: " + error.stack);
-      return res.status(500).json({ error: "Changed db" });
+      return res
+        .status(500)
+        .json({ error: "An error occurred while fetching products" });
     }
     res.json(results);
   });
 });
 
-app.listen(process.env.API_PORT, () => {
-  console.log("Server running");
+const port = process.env.PORT || 3000; // Default port 3000 if not specified in environment variables
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
