@@ -30,7 +30,7 @@ app.get("/products", (req, res) => {
   connection.query("SELECT * FROM products", (error, results, fields) => {
     if (error) {
       console.error("Error querying database: " + error.stack);
-      return res.status(500).json({ error: "Internal Server Error" });
+      return res.status(500).json({ error: "Changed db" });
     }
     res.json(results);
   });
