@@ -6,10 +6,10 @@ import "bulma/css/bulma.min.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./components/NavBar";
+
 function App() {
   const { isAuthenticated, user } = useAuth0();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -17,22 +17,22 @@ function App() {
         .get("https://api-app-bxiq.onrender.com/products")
         .then((res) => {
           setProducts(res.data);
-          setLoading(false); // Set loading to false when data is fetched
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-          setLoading(false); // Set loading to false in case of error
         });
     }
   }, [isAuthenticated]); // Add isAuthenticated as a dependency
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
+  const handleAddToCart = (productId) => {
+    // Handle adding product to cart
+    console.log("Product added to cart:", productId);
+  };
+
+  const handleBuyNow = (productId) => {
+    // Handle buying product
+    console.log("Product bought:", productId);
+  };
 
   if (isAuthenticated) {
     return (
@@ -48,14 +48,26 @@ function App() {
                   </figure>
                 </div>
                 <div className="card-content">
-                  <div className="media">
-                    <div className="media-content">
-                      <p className="title is-4">{product.product_name}</p>
-                      <p className="subtitle is-6">${product.product_price}</p>
-                    </div>
+                  <div className="content">
+                    <p className="title is-4">{product.product_name}</p>
+                    <p>${product.product_price}</p>
+                    <p>{product.product_desc}</p>
                   </div>
-                  <div className="content">{product.product_desc}</div>
                 </div>
+                <footer className="card-footer">
+                  <button
+                    className="card-footer-item button is-primary"
+                    onClick={() => handleAddToCart(product.id)}
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    className="card-footer-item button is-success"
+                    onClick={() => handleBuyNow(product.id)}
+                  >
+                    Buy Now
+                  </button>
+                </footer>
               </div>
             </div>
           ))}
