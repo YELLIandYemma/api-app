@@ -1,15 +1,14 @@
-import "./App.css";
-import LoginButton from "./components/Login";
-import LogoutButton from "./components/Logout";
+import "../App.css";
+import LoginButton from "../components/Login";
+import LogoutButton from "../components/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
-import "bulma/css/bulma.min.css";
 import { useState, useEffect } from "react";
+import "bulma/css/bulma.min.css";
 import axios from "axios";
-import Navbar from "./components/NavBar";
+
 function App() {
   const { isAuthenticated, user } = useAuth0();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -17,27 +16,27 @@ function App() {
         .get("https://api-app-bxiq.onrender.com/products")
         .then((res) => {
           setProducts(res.data);
-          setLoading(false); // Set loading to false when data is fetched
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-          setLoading(false); // Set loading to false in case of error
         });
     }
   }, [isAuthenticated]); // Add isAuthenticated as a dependency
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
+  const handleAddToCart = (productId) => {
+    // Add your logic here to handle adding the product to the cart
+    console.log(`Product ${productId} added to cart`);
+  };
+
+  const handleBuyNow = (productId) => {
+    // Add your logic here to handle buying the product
+    console.log(`Product ${productId} bought`);
+  };
 
   if (isAuthenticated) {
     return (
       <>
-        <Navbar />
+        <LogoutButton />
         <div className="columns is-multiline">
           {products.map((product) => (
             <div key={product.id} className="column is-4">
@@ -55,6 +54,20 @@ function App() {
                     </div>
                   </div>
                   <div className="content">{product.product_desc}</div>
+                  <div className="buttons">
+                    <button
+                      className="button is-primary"
+                      onClick={() => handleAddToCart(product.id)}
+                    >
+                      Add to Cart
+                    </button>
+                    <button
+                      className="button is-success"
+                      onClick={() => handleBuyNow(product.id)}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

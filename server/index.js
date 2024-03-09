@@ -38,7 +38,7 @@ app.get("/products", (req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000; // Default port 3000 if not specified in environment variables
+const port = process.env.PORT || 5000; // Default port 3000 if not specified in environment variables
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
