@@ -30,10 +30,18 @@ function App() {
   };
 
   const handleBuyNow = (productId) => {
-    // Handle buying product
-    console.log("Product bought:", productId);
+    // Send a request to your backend to add the product to the orders table
+    axios
+      .post("/api/orders", { productId })
+      .then((response) => {
+        // Handle success (e.g., show a success message)
+        console.log("Product added to orders table:", response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error adding product to orders table:", error);
+      });
   };
-
   if (isAuthenticated) {
     return (
       <>

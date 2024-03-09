@@ -37,6 +37,20 @@ app.get("/products", (req, res) => {
     res.json(results);
   });
 });
+app.post("/api/orders", (req, res) => {
+  const { productId } = req.body;
+
+  const product = {
+    id: productId,
+    name: "Sample Product",
+    price: 10.99,
+    // Add any other product details you need
+  };
+
+  orders.push(product);
+
+  res.status(201).json(product);
+});
 
 const port = process.env.PORT || 5000; // Default port 3000 if not specified in environment variables
 app.listen(port, () => {
