@@ -38,18 +38,21 @@ app.get("/products", (req, res) => {
   });
 });
 app.post("/api/orders", (req, res) => {
-  const { productId } = req.body;
+  const { product_id, user_id, quantity, total_price } = req.body;
 
-  const product = {
-    id: productId,
-    name: "Sample Product",
-    price: 10.99,
-    // Add any other product details you need
-  };
+  const sql = `INSERT INTO orders (product_id, user_id, quantity, total_price) 
+               VALUES (?, ?, ?, ?)`;
+  const values = [product_id, user_id, quantity, total_price];
 
-  orders.push(product);
-
-  res.status(201).json(product);
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      console.error("Error adding order:", err);
+      res.status(500).json({ error: "Error adding order" });
+      return;
+    }
+    console.log("Order added successfully");
+    res.status(200).json({ message: "Order added successfully" });
+  });
 });
 
 const port = process.env.PORT || 5000; // Default port 3000 if not specified in environment variables
