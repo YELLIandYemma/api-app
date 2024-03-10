@@ -40,9 +40,9 @@ app.get("/products", (req, res) => {
 app.post("/orders", (req, res) => {
   const { product_id, user_id, quantity, total_price } = req.body;
 
-  const sql = `INSERT INTO orders (product_id, user_id, quantity, total_price) 
+  const sql = `INSERT INTO orders (product_id, address, quantity, total_price) 
                VALUES (?, ?, ?, ?)`;
-  const values = [product_id, user_id, quantity, total_price];
+  const values = [product_id, adresss, quantity, total_price];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
