@@ -25,10 +25,10 @@ const Navbar = () => {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <li href className="navbar-item">
-            {user.email}
+            Email: {user.email}
           </li>
 
-          <li className="navbar-item">{user.name}</li>
+          <li className="navbar-item">Name: {user.name}</li>
         </div>
 
         <div className="navbar-end">
