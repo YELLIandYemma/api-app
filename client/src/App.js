@@ -75,7 +75,23 @@ function App() {
       </>
     );
   } else {
-    return <LoginButton />;
+    return (
+      <section className="hero is-fullheight is-primary">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="columns is-centered">
+              <div className="column is-half">
+                <h1 className="title">Welcome!</h1>
+                <h2 className="subtitle">
+                  Please press the button to continue.
+                </h2>
+                <LoginButton />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 }
 
