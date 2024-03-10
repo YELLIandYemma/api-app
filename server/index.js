@@ -37,7 +37,7 @@ app.get("/products", (req, res) => {
     res.json(results);
   });
 });
-app.post("/api/orders", (req, res) => {
+app.post("/orders", (req, res) => {
   const { product_id, user_id, quantity, total_price } = req.body;
 
   const sql = `INSERT INTO orders (product_id, user_id, quantity, total_price) 

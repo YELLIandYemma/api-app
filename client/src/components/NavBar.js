@@ -1,12 +1,13 @@
 import React from "react";
 import LogoutButton from "./Logout";
-
+import { useAuth0 } from "@auth0/auth0-react";
 const Navbar = () => {
+  const { user } = useAuth0();
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          Logo
+          SHREYCO
         </a>
 
         <button
@@ -23,17 +24,11 @@ const Navbar = () => {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a href="/" className="navbar-item">
-            Home
-          </a>
+          <li href className="navbar-item">
+            {user.email}
+          </li>
 
-          <a href="/products" className="navbar-item">
-            Products
-          </a>
-
-          <a href="/cart" className="navbar-item">
-            Cart
-          </a>
+          <li className="navbar-item">{user.name}</li>
         </div>
 
         <div className="navbar-end">
